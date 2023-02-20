@@ -1,0 +1,260 @@
+package ro.ase.cts.lab02;
+
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+	// write your code here
+        OShop shop = new OShop("Emag", "logo.jpg", new ArrayList<Prod>());
+
+        Prod produs1 = new Prod("Laptop", 3200.5, 1,1, 1123, "");
+        Prod produs2 = new Prod("Frigider", 207.95, 1,2, 1245, "");
+
+        Prod produs3 = new Prod(produs1);
+
+        produs3.setQty(5);
+        produs3.setProdName("Paine");
+
+        shop.addProducts(produs1);
+        shop.addProducts(produs2);
+
+        shop.removeProducts(produs1);
+
+	boolean productsAreEqual = produs1.equals(produs2);
+        System.out.println(productsAreEqual);
+    }
+}
+
+class OnlineShop {
+    private String name;
+    private String image;
+    private ArrayList<Prod> products;
+
+    OnlineShop(String name, String img, ArrayList<Prod> products)
+    {
+        this.products = new ArrayList<Prod>();
+        this.image = img;
+        this.name = name;
+    }
+
+    public void addProducts(Prod list)
+    {
+        this.products.add(p);
+    }
+
+    public void removeProducts(Prod list)
+    {
+        this.products.remove(p);
+    }
+
+    public String getOnlineShopName() {
+        return name;
+    }
+
+    public void setOnlineShopName(String onlineShopName) {
+        this.name = onlineShopName;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String img) {
+        this.image = img;
+    }
+}
+
+class Prod
+{
+    private int id;
+    private String name;
+    private double price;
+    private int type;
+    private int category;
+    private int quantity;
+    private String expirationDate; //expiry date - only for goods
+    private String details; 	   // ex.: processor, memory, power, volume (for refrigerators etc)
+
+    public Prod(String name, double price, int type, int category, int id, String exp)
+    {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.category = category;
+        this.id = id;
+        this.expirationDate = exp;
+    }
+
+    public Prod(Prod p)
+    {
+        this.name = p.name;
+        this.price = p.price;
+        this.type = p.type;
+        this.category = p.category;
+        this.id = p.id;
+    }
+
+    public double getProductPrice() {
+        return price;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.price = productPrice;
+    }
+
+    public String getProdName() {
+        return name;
+    }
+
+    public void setProdName(String prodName) {
+        this.name = prodName;
+    }
+
+    public int getProductType() {
+        return type;
+    }
+
+    public void setProductType(int productType) {
+        this.type = productType;
+    }
+
+    public boolean equals(Prod p)
+    {
+        if(p.id != this.id)
+            return false;
+
+	boolean sameProductNames = p.name.equals(this.name);
+        if(!sameProducNames)
+            return false;
+
+        if(p.price != this.price)
+            return false;
+
+        if(p.type != p.type)
+            return false;
+
+        if(p.category != this.category)
+            return false;
+
+        return true;
+    }
+
+    public void priceGrowth(double val)
+    {
+        this.productPrice += this.productPrice * val;
+    }
+
+    public void priceCut(double val)
+    {
+        this.productPrice -= this.productPrice * val / 100;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int prodId) {
+        this.id = prodId;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+}
+
+class User
+{
+    private String username;
+    private String id;
+    private ArrayList<Order> orders1;
+    private ArrayList<Order> orders2;
+
+    public User(String username, String userId)
+    {
+        this.username = username;
+        this.id = userId;
+        orders1 = new ArrayList<Order>();
+        orders2 = new ArrayList<Order>();
+    }
+
+    public void addOrder1(Order order)
+    {
+        this.orders1.add(order);
+    }
+
+    public void addOrder2(Order order)
+    {
+        this.orders2.add(order);
+    }
+}
+
+class Order
+{
+    private ArrayList<Prod> productList;
+    private String address;
+
+    public Order()
+    {
+        productList = new ArrayList<Prod>();
+    }
+    public void addProduct(Prod p)
+    {
+	int orderSize = productList.size();
+        if(orderSize <= 99)
+            productList.add(p);
+    }
+
+    public void removeProduct(Prod p)
+    {
+        productList.remove(p);
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String addr) {
+        this.address = addr;
+    }
+}
+
+class InventoryP
+{
+    private Prod product;
+    private int quantity;
+
+    public InventoryP(Prod product, int quantity)
+    {
+        this.product = new Prod(product);
+        this.quantity = quantity;
+    }
+    public Prod getProduct() {
+        return product;
+    }
+
+    public void setProduct(Prod product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+}
+
